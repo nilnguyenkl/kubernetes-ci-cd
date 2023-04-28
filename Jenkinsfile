@@ -51,6 +51,7 @@ pipeline {
                     env.BUILDIMG = imageName
                 }
                 // sh 'sudo apt-get update && sudo apt-get install -y docker.io'
+                sh 'curl -fsSL https://get.docker.com | sh'
                 sh "docker build -t ${env.BUILDIMG} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
             }
         }

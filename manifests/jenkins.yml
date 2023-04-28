@@ -71,9 +71,6 @@ spec:
             memory: 3Gi
         securityContext:
           privileged: true
-        # securityContext:
-        #   runAsUser: 0
-        #   runAsGroup: 0
         ports:
         - containerPort: 8080
           name: jenkins
