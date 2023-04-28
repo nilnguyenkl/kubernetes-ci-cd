@@ -50,7 +50,7 @@ pipeline {
                     imageName = "${registryHost}${appName}:${tag}"
                     env.BUILDIMG = imageName
                 }
-                sh 'sudo apt-get update && sudo apt-get install -y docker.io'
+                // sh 'sudo apt-get update && sudo apt-get install -y docker.io'
                 sh "docker build -t ${env.BUILDIMG} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
             }
         }
