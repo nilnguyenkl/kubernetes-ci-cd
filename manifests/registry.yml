@@ -102,8 +102,6 @@ spec:
             value: http://localhost:5000/v2
           - name: REGISTRY_NAME
             value: cluster-registry
-          # - name: REGISTRY_HTTP_SECRET
-          #   value: my-secret-key
       volumes:
       - name: docker
         hostPath:

@@ -63,7 +63,7 @@ spec:
         tier: jenkins
     spec:
       containers:
-      - image: jenkins/jenkins:lts-jdk11
+      - image: "127.0.0.1:30400/jenkins:lts-jdk11"
         name: jenkins
         resources:
           limits:
@@ -74,16 +74,19 @@ spec:
         ports:
         - containerPort: 8080
           name: jenkins
+        # env:
+        #   - name: DOCKER_HOST
+        #     value: tcp://host.docker.internal:2375
         volumeMounts:
         - name: jenkins-persistent-storage
           mountPath: /var/jenkins_home
-          # mountPath: /root/.jenkins
         - name: docker
           mountPath: /var/run/docker.sock
       volumes:
       - name: docker
         hostPath:
           path: /var/run/docker.sock
+          # path: /usr/local/bin/docker
       - name: jenkins-persistent-storage
         persistentVolumeClaim:
           claimName: jenkins-claim
