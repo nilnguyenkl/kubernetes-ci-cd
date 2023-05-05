@@ -49,13 +49,15 @@ pipeline {
                     tag = readFile('commit-id').trim()
                     imageName = "${registryHost}${appName}:${tag}"
                     env.BUILDIMG = imageName
+                    echo "imageName: ${imageName}, tag: ${tag}"
                 }
-                // sh 'sudo apt-get update && sudo apt-get install -y docker.io'
+                echo "docker build -t ${env.BUILDIMG} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
                 sh "docker build -t ${env.BUILDIMG} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
             }
         }
         stage("Push") {
             steps {
+                echo "docker push ${env.BUILDIMG}"
                 sh "docker push ${env.BUILDIMG}"
             }
         }
