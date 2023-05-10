@@ -19,7 +19,7 @@ class HomePage extends React.Component {
       <div className="home-page">
         <PuzzleComponent />
         <div className="instances">
-          <InstanceComponent />
+          {/* <InstanceComponent /> */}
         </div>
         <div className="dbs image-column">
           <Database databaseName="MongoDB" active={this.props.fromMongo}/>

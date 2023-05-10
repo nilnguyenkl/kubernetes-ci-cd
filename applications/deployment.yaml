@@ -33,7 +33,6 @@ spec:
           name: puzzle
 
 ---
-################# Đúng ################
 apiVersion: v1
 kind: Service
 metadata:
@@ -47,10 +46,10 @@ spec:
   selector:
     app: puzzle
     tier: puzzle
-  # type: NodePort
-  type: LoadBalancer
-
+  type: NodePort
 ---
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -71,17 +70,17 @@ spec:
         tier: mongo
     spec:
       containers:
+      # - image: mongo:3
       - image: mongo:3.6.23
         name: mongo
         imagePullPolicy: Always
         ports:
         - containerPort: 27017
           name: mongo
-          
+
 
 
 ---
-################# Đúng ################
 apiVersion: v1
 kind: Service
 metadata:
@@ -95,27 +94,25 @@ spec:
   selector:
     app: mongo
     tier: mongo
-  # type: NodePort
-  type: LoadBalancer
-
+  type: NodePort
 
 
 
 ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#  name: puzzle
-# spec:
-#   rules:
-#   - host: puzzle.192.168.49.2.xip.io
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: puzzle
-#             port:
-#               number: 3000
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+ name: puzzle
+spec:
+  rules:
+  - host: puzzle.192.168.49.2.xip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: puzzle
+            port:
+              number: 3000
           

@@ -1,7 +1,9 @@
 import fetchRetry from 'fetch-retry';
 import * as actions from './actionTypes';
 import constants from '../constants';
-const baseUrl = `http://puzzle.${constants.minikubeIp}.xip.io/puzzle/v1`;
+// const baseUrl = `http://puzzle.${constants.minikubeIp}.xip.io/puzzle/v1`;
+// const baseUrl = `http://${constants.ip}:${constants.puzzlePort}.xip.io/puzzle/v1`;
+const baseUrl = `http://${constants.ip}:${constants.puzzlePort}/puzzle/v1`;
 const arrowDisplayTime = 1000;
 
 export function getPuzzleDataSuccess (json) {

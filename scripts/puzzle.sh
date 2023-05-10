@@ -7,7 +7,10 @@ TAG=`git rev-parse --short HEAD`
 docker build -t 127.0.0.1:30400/puzzle:$TAG -f applications/puzzle/Dockerfile applications/puzzle
 
 #Setup the proxy for the registry
-docker stop socat-registry; docker rm socat-registry; docker run -d -e "REGIP=`minikube ip`" --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:`minikube ip`:30400"
+docker stop socat-registry
+docker rm socat-registry
+docker run -d --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:host.docker.internal:53009"
+# docker run -d -e "REGIP=`minikube ip`" --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:`minikube ip`:30400"
 
 echo "5 second sleep to make sure the registry is ready"
 sleep 5;

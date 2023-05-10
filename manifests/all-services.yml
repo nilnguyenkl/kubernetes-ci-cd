@@ -12,6 +12,8 @@ spec:
     app: monitor-scale
     tier: monitor-scale
   type: NodePort
+
+
 ---
 apiVersion: v1
 kind: Service
@@ -28,6 +30,8 @@ spec:
     tier: puzzle
   type: NodePort
 ---
+
+
 apiVersion: v1
 kind: Service
 metadata:

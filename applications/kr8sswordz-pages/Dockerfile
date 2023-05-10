@@ -8,6 +8,8 @@ WORKDIR /usr/src/app
 COPY package.json gulpfile.js yarn.lock /usr/src/app/
 
 RUN yarn --pure-lockfile
+# RUN npm install fetch-retry --save
+RUN npm i fetch-retry@1.1.0
 
 # Bundle app source
 COPY . /usr/src/app
