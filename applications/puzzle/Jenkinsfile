@@ -49,7 +49,7 @@ pipeline {
                     env.BUILDIMG = imageName
                     echo "imageName: ${imageName}, tag: ${tag}"
                 }
-                sh "docker build -t ${imageName} applications/puzzle/Dockerfile applications/puzzle"
+                sh "docker build -t ${imageName} -f applications/puzzle/Dockerfile applications/puzzle"
             }
         }
         stage("Push") {
