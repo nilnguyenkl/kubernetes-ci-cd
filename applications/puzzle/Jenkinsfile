@@ -46,7 +46,7 @@ pipeline {
                 script {
                     tag = readFile('commit-id').trim()
                     imageName = "${registryHost}${appName}:${tag}"
-                    env.BUILDIMG = imageName
+                    env.BUILDING = imageName
                     echo "imageName: ${imageName}, tag: ${tag}"
                 }
                 sh "docker build -t ${imageName} -f applications/puzzle/Dockerfile applications/puzzle"
