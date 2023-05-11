@@ -65,10 +65,10 @@ spec:
       containers:
       - image: "127.0.0.1:30400/jenkins:lts-jdk11"
         name: jenkins
-        resources:
-          limits:
-            cpu: "2"
-            memory: 3Gi
+        # resources:
+        #   limits:
+        #     cpu: "2"
+        #     memory: 2Gi
         securityContext:
           privileged: true
         ports:

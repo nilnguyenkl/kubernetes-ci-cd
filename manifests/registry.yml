@@ -85,6 +85,10 @@ spec:
       containers:
         - image: registry:2
           name: registry
+          # resources:
+          #   limits:
+          #     cpu: "2"
+          #     memory: 700Mi  # Set an upper limit on memory usage
           volumeMounts:
             - name: docker
               mountPath: /var/run/docker.sock
@@ -95,6 +99,10 @@ spec:
               name: registry
         - name: registryui
           image: hyper/docker-registry-web
+          # resources:
+          #   limits:
+          #     cpu: "2"
+          #     memory: 700Mi  # Set an upper limit on memory usage
           ports:
             - containerPort: 8080
           env:
