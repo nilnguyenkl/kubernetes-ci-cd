@@ -2,12 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: etcd-operator
-  # labels:
-  #   app: etcd-operator
+  labels:
+    name: etcd-operator
 spec:
   selector:
     matchLabels:
-      # app: etcd-operator
       name: etcd-operator
   replicas: 1
   template:
@@ -17,68 +16,21 @@ spec:
     spec:
       containers:
       - name: etcd-operator
-        # image: quay.io/coreos/etcd-operator:v0.9.4
-        image: quay.io/coreos/etcd-operator
+        image: quay.io/coreos/etcd-operator:v0.9.4
         command:
         - etcd-operator
+        - --create-crd=false
         # Uncomment to act for resources in all namespaces. More information in doc/user/clusterwide.md
         #- -cluster-wide
         env:
         - name: MY_POD_NAMESPACE
           valueFrom:
             fieldRef:
+              apiVersion: v1
               fieldPath: metadata.namespace
         - name: MY_POD_NAME
           valueFrom:
             fieldRef:
+              apiVersion: v1
               fieldPath: metadata.name
-
-# ---
-### ENDPOINT ###
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: Role
-# metadata:
-#   name: endpoint-reader
-# rules:
-#   - apiGroups: [""]
-#     resources: ["endpoints"]
-#     verbs: ["*"]
-
-# ---
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: RoleBinding
-# metadata:
-#   name: endpoint-reader-binding
-# roleRef:
-#   apiGroup: rbac.authorization.k8s.io
-#   kind: Role
-#   name: endpoint-reader
-# subjects:
-# - kind: ServiceAccount
-#   name: default
-#   namespace: default
-
-# ---
-### Pods ###
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: Role
-# metadata:
-#   name: pod-reader
-# rules:
-# - apiGroups: [""]
-#   resources: [pods]
-#   verbs: ["*"]
-
-# ---
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: RoleBinding
-# metadata:
-#   name: pod-reader-binding
-# roleRef:
-#   apiGroup: rbac.authorization.k8s.io
-#   kind: Role
-#   name: pod-reader
-# subjects:
-# - kind: ServiceAccount
-#   name: default
-#   namespace: default
+      serviceAccountName: etcd-operator-sa

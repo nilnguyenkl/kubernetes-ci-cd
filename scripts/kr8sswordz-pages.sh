@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Retrieve the latest git commit hash
-# TAG=`git rev-parse --short HEAD`
-TAG="5a62fft"
+TAG=`git rev-parse --short HEAD`
+# TAG="5a62fft"
 
 #Build the docker image
 docker build -t 127.0.0.1:30400/kr8sswordz:$TAG -f applications/kr8sswordz-pages/Dockerfile applications/kr8sswordz-pages
@@ -10,7 +10,7 @@ docker build -t 127.0.0.1:30400/kr8sswordz:$TAG -f applications/kr8sswordz-pages
 #Setup the proxy for the registry
 docker stop socat-registry
 docker rm socat-registry
-docker run -d --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:host.docker.internal:60775"
+docker run -d --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:host.docker.internal:57282"
 # docker run -d -e "REGIP=`minikube ip`" --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:`minikube ip`:30400"
 
 echo "5 second sleep to make sure the registry is ready"

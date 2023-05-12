@@ -6,15 +6,16 @@ echo "installing etcd operator"
 kubectl apply -f scripts/etcd/deployment.yaml --force
 kubectl rollout status -f scripts/etcd/deployment.yaml
 
-kubectl apply -f scripts/etcd/crd.yaml --force
-kubectl rollout status -f scripts/etcd/crd.yaml
+# kubectl apply -f scripts/etcd/crd.yaml --force
+# kubectl rollout status -f scripts/etcd/crd.yaml
 
 # until kubectl get thirdpartyresource cluster.etcd.coreos.com
-# # until kubectl get crd cluster.etcd.coreos.com
-# do
-#     echo "waiting for operator"
-#     sleep 2
-# done
+# until kubectl get crd cluster.etcd.coreos.com
+until kubectl get crd etcdclusters.etcd.database.coreos.com
+do
+    echo "waiting for operator"
+    sleep 2
+done
 
 echo "pausing for 10 seconds for operator to settle"
 sleep 10
@@ -28,8 +29,8 @@ kubectl  create -f scripts/etcd/example-etcd-cluster-nodeport-service.json
 
 echo "waiting for etcd cluster to turnup"
 
-until kubectl  get pod example-etcd-cluster-0002
-do
-    echo "waiting for etcd cluster to turnup"
-    sleep 2
-done
+# until kubectl  get pod example-etcd-cluster-55bc8cd695-6xr2g
+# do
+#     echo "waiting for etcd cluster to turnup"
+#     sleep 2
+# done

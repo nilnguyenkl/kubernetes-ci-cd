@@ -9,9 +9,10 @@ spec:
     spec:
       containers:
       - name: etcd-job
-        image: tenstartups/etcdctl
-        env:
-          - name: ETCDCTL_ENDPOINT
-            value: 'http://example-etcd-cluster-client-service:2379'
-        command: ["etcdctl",  "mkdir", "pod-list"]
+        image: anldisr/etcdctl
+        # env:
+        #   - name: ETCDCTL_ENDPOINT
+        #     value: 'http://example-etcd-cluster-client-service:2379'
+        # command: ["etcdctl",  "mkdir", "pod-list"]
+        command: ["etcdctl",  "--endpoints=http://host.docker.internal:2379", "put", "/pod-list", ""]
       restartPolicy: Never
