@@ -49,6 +49,39 @@ spec:
           name: kubectl-api          
 
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: monitor-scale-admin
+  namespace: default
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: monitor-scale-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: monitor-scale-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: monitor-scale-role
+subjects:
+- kind: ServiceAccount
+  name: monitor-scale-admin
+  namespace: default
+
+
+  
 # apiVersion: apps/v1
 # kind: Ingress
 # metadata:
@@ -68,26 +101,26 @@ spec:
 #           serviceName: monitor-scale
 #           servicePort: 3001
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: monitor-scale
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /
-spec:
-  defaultBackend:
-    service:
-      name: monitor-scale
-      port:
-        number: 3001
-  rules:
-  - host: monitor-scale.192.168.49.2.xip.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: monitor-scale
-            port:
-              number: 3001
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: monitor-scale
+#   annotations:
+#     ingress.kubernetes.io/rewrite-target: /
+# spec:
+#   defaultBackend:
+#     service:
+#       name: monitor-scale
+#       port:
+#         number: 3001
+#   rules:
+#   - host: monitor-scale.192.168.49.2.xip.io
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: monitor-scale
+#             port:
+#               number: 3001
