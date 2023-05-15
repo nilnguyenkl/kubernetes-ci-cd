@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       # - image: 127.0.0.1:30400/monitor-scale:latest
-      - image: 127.0.0.1:30400/monitor-scale:b8e7b4c
+      - image: 127.0.0.1:30400/monitor-scale:58bec7a
         name: monitor-scale
         imagePullPolicy: Always
         ports:

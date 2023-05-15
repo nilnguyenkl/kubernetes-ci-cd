@@ -27,7 +27,7 @@ spec:
               command: ["/usr/src/app/up.sh"]
           preStop:
             exec:
-              command: ["/usr/src/app/down.sh"]        
+              command: ["/usr/src/app/down.sh"]      
         ports:
         - containerPort: 3000
           name: puzzle
