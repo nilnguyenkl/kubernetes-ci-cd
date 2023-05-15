@@ -10,7 +10,7 @@ docker build -t 127.0.0.1:30400/kr8sswordz:$TAG -f applications/kr8sswordz-pages
 #Setup the proxy for the registry
 docker stop socat-registry
 docker rm socat-registry
-docker run -d --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:host.docker.internal:57282"
+docker run -d --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:host.docker.internal:64463"
 # docker run -d -e "REGIP=`minikube ip`" --name socat-registry -p 30400:5000 chadmoon/socat:latest bash -c "socat TCP4-LISTEN:5000,fork,reuseaddr TCP4:`minikube ip`:30400"
 
 echo "5 second sleep to make sure the registry is ready"

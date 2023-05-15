@@ -21,13 +21,13 @@ spec:
       - image: 127.0.0.1:30400/puzzle:latest
         name: puzzle
         imagePullPolicy: Always
-        # lifecycle:
-        #   postStart:
-        #     exec:
-        #       command: ["/up.sh"]
-        #   preStop:
-        #     exec:
-        #       command: ["/down.sh"]        
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/up.sh"]
+          preStop:
+            exec:
+              command: ["/down.sh"]        
         ports:
         - containerPort: 3000
           name: puzzle

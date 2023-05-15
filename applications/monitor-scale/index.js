@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-etcd = new Etcd("http://example-etcd-cluster-client-service:2379")
-
+// etcd = new Etcd("http://example-etcd-cluster-client-service:2379")
+etcd = new Etcd("http://host.docker.internal:2379")
 var watcher = etcd.watcher("pod-list", null, {recursive: true})
 watcher.on("change", function(val) {
 
@@ -58,7 +58,8 @@ app.post('/loadtest/concurrent', function (req, res) {
 
   var count = req.body.count;
   console.log('Count requested is: %s', count);
-  var url = "http://puzzle:3000/puzzle/v1/crossword";
+  // var url = "http://puzzle:3000/puzzle/v1/crossword";
+  var url = "http://host.docker.internal:3000/puzzle/v1/crossword";
   var myUrls = [];
   for (var i = 0; i < req.body.count; i++) {
     myUrls.push(url);
@@ -80,7 +81,8 @@ app.post('/loadtest/concurrent', function (req, res) {
 app.post('/loadtest/consecutive', function (req, res) {
   
   var count = req.body.count;
-  var url = "http://puzzle:3000/puzzle/v1/crossword";
+  // var url = "http://puzzle:3000/puzzle/v1/crossword";
+  var url = "http://host.docker.internal:3000/puzzle/v1/crossword";
   var callArray = [];
 
   for (var i = 0; i < req.body.count; i++) {

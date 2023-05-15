@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 HOSTNAME=`hostname`
-curl "http://monitor-scale:3001/down/$HOSTNAME"
+curl "http://host.docker.internal:3001/down/$HOSTNAME"
+# curl "http://monitor-scale:3001/down/$HOSTNAME"
