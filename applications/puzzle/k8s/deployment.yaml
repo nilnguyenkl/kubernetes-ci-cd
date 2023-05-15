@@ -24,10 +24,10 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/up.sh"]
+              command: ["/usr/src/app/up.sh"]
           preStop:
             exec:
-              command: ["/down.sh"]        
+              command: ["/usr/src/app/down.sh"]        
         ports:
         - containerPort: 3000
           name: puzzle
