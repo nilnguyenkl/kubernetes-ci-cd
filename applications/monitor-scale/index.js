@@ -45,12 +45,8 @@ app.post('/scale', function (req, res) {
   //   status:{}
   // };
   var putBody = {
-    kind:"Scale",
-    apiVersion:"apps/v1",
-    metadata: { 
-      name:"puzzle",
-      namespace:"default"
-    },
+    // kind:"Scale",
+    // apiVersion:"apps/v1",
     spec: {
       replicas:1
     },
@@ -62,6 +58,7 @@ app.post('/scale', function (req, res) {
     if (err) {
       return console.error('Failed to scale:', err);
     }
+    console.log(body)
     console.log('Scale success!');
     res.send('success');
   });
