@@ -47,6 +47,10 @@ app.post('/scale', function (req, res) {
   var putBody = {
     // kind:"Scale",
     // apiVersion:"apps/v1",
+    metadata: { 
+      name:"puzzle",
+      namespace:"default"
+    },
     spec: {
       replicas:1
     },
