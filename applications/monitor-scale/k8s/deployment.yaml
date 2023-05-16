@@ -33,6 +33,7 @@ spec:
         app: monitor-scale
         tier: monitor-scale
     spec:
+      serviceAccountName: monitor-scale-admin
       containers:
       # - image: 127.0.0.1:30400/monitor-scale:latest
       - image: 127.0.0.1:30400/monitor-scale:latest
