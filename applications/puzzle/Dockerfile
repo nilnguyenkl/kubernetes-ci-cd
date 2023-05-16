@@ -14,8 +14,8 @@ COPY . /usr/src/app
 COPY up.sh /up.sh
 COPY down.sh /down.sh
 
-RUN chmod +x /up.sh
-RUN chmod +x /down.sh
+RUN chmod 777 /up.sh
+RUN chmod 777 /down.sh
 
 EXPOSE 3000
 CMD [ "node", "." ]
